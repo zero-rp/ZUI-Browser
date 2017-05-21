@@ -147,7 +147,7 @@ inline bool isnan(double num) { return !!_isnan(num); }
 inline bool signbit(double num) { return _copysign(1.0, num) < 0; }
 #endif
 
-inline double nextafter(double x, double y) { return _nextafter(x, y); }
+#define nextafter _nextafter
 inline float nextafterf(float x, float y) { return x > y ? x - FLT_EPSILON : x + FLT_EPSILON; }
 
 inline double copysign(double x, double y) { return _copysign(x, y); }
