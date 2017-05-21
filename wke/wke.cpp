@@ -20,7 +20,6 @@
 //cexer: 必须包含在后面，因为其中的 wke.h -> windows.h 会定义 max、min，导致 WebCore 内部的 max、min 出现错乱。
 #include "wkeString.h"
 #include "wkeWebView.h"
-#include "wkeWebWindow.h"
 #include <shlwapi.h>
 #include <stdio.h>
 //////////////////////////////////////////////////////////////////////////
@@ -680,87 +679,6 @@ STDAPI_(BOOL) DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID /*lpRe
 
 
 static Vector<wke::CWebView*> s_webViews;
-
-wkeWebView* wkeCreateWebWindow(wkeWindowType type, void* parent, int x, int y, int width, int height)
-{
-    wke::CWebWindow* webWindow = new wke::CWebWindow();
-    if (!webWindow->create((HWND)parent, type, x, y, width, height))
-    {
-        delete webWindow;
-        return NULL;
-    }
-    s_webViews.append(webWindow);
-
-    return webWindow;
-}
-
-void wkeDestroyWebWindow(wkeWebView* webWindow)
-{
-    webWindow->destroy();
-}
-
-
-void* wkeGetWindowHandle(wkeWebView* webWindow)
-{
-    if (wke::CWebWindow* window = dynamic_cast<wke::CWebWindow*>(webWindow))
-        return window->windowHandle();
-    else
-        return NULL;
-}
-
-void wkeOnWindowClosing(wkeWebView* webWindow, wkeWindowClosingCallback callback, void* param)
-{
-    if (wke::CWebWindow* window = dynamic_cast<wke::CWebWindow*>(webWindow))
-        return window->onClosing(callback, param);
-}
-
-void wkeOnWindowDestroy(wkeWebView* webWindow, wkeWindowDestroyCallback callback, void* param)
-{
-    if (wke::CWebWindow* window = dynamic_cast<wke::CWebWindow*>(webWindow))
-        return window->onDestroy(callback, param);
-}
-
-void wkeShowWindow(wkeWebView* webWindow, bool showFlag)
-{
-    if (wke::CWebWindow* window = dynamic_cast<wke::CWebWindow*>(webWindow))
-        return window->show(showFlag);
-}
-
-void wkeEnableWindow(wkeWebView* webWindow, bool enableFlag)
-{
-    if (wke::CWebWindow* window = dynamic_cast<wke::CWebWindow*>(webWindow))
-        return window->enable(enableFlag);
-}
-
-void wkeMoveWindow(wkeWebView* webWindow, int x, int y, int width, int height)
-{
-    if (wke::CWebWindow* window = dynamic_cast<wke::CWebWindow*>(webWindow))
-        return window->move(x, y, width, height);
-}
-
-void wkeMoveToCenter(wkeWebView* webWindow)
-{
-    if (wke::CWebWindow* window = dynamic_cast<wke::CWebWindow*>(webWindow))
-        return window->moveToCenter();
-}
-
-void wkeResizeWindow(wkeWebView* webWindow, int width, int height)
-{
-    if (wke::CWebWindow* window = dynamic_cast<wke::CWebWindow*>(webWindow))
-        return window->resize(width, height);
-}
-
-void wkeSetWindowTitle(wkeWebView* webWindow, const utf8* title)
-{
-    if (wke::CWebWindow* window = dynamic_cast<wke::CWebWindow*>(webWindow))
-        return window->setTitle(title);
-}
-
-void wkeSetWindowTitleW(wkeWebView* webWindow, const wchar_t* title)
-{
-    if (wke::CWebWindow* window = dynamic_cast<wke::CWebWindow*>(webWindow))
-        return window->setTitle(title);
-}
 
 void wkeSetHostWindow(wkeWebView* webView, void* host)
 {

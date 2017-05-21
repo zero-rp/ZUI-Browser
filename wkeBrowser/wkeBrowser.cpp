@@ -161,9 +161,9 @@ wkeWebView* onCreateView(wkeWebView* webView, void* param, const wkeNewViewInfo*
     }
     else
     {
-        wkeWebView* newWindow = wkeCreateWebWindow(WKE_WINDOW_TYPE_POPUP, NULL, info->x, info->y, info->width, info->height);
-        wkeShowWindow(newWindow, SW_SHOW);
-        return newWindow;
+        //wkeWebView* newWindow = wkeCreateWebWindow(WKE_WINDOW_TYPE_POPUP, NULL, info->x, info->y, info->width, info->height);
+        //wkeShowWindow(newWindow, SW_SHOW);
+        //return newWindow;
     }
 
     return NULL;
