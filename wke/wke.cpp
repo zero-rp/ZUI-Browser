@@ -22,11 +22,20 @@
 #include "wkeWebView.h"
 #include "wkeWebWindow.h"
 #include <shlwapi.h>
-
+#include <stdio.h>
 //////////////////////////////////////////////////////////////////////////
 
-
-
+#include "stdio.h" 
+_ACRTIMP_ALT FILE* __cdecl __acrt_iob_func(unsigned);
+#ifdef __cplusplus 
+extern "C"
+#endif 
+FILE* __cdecl __iob_func(unsigned i) {
+    return __acrt_iob_func(i);
+}
+int __cdecl _open(char const *a, int b, int c) {
+    return 0;
+}
 extern "C" IMAGE_DOS_HEADER __ImageBase;
 
 void wkeInitialize()

@@ -431,7 +431,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
         fwrite("\xFF\xFE", 2, 1, g_consoleLog);
 
     wkeOnConsoleMessage(g_webView, onConsoleMessage, NULL);
-	wkeLoadURL(g_webView, "http://www.59or.com/");
+	wkeLoadURL(g_webView, "http://www.baidu.com/");
 
     //…Ë÷√UserAgent
     wkeSetUserAgent(g_webView, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36");
